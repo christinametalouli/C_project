@@ -1,0 +1,496 @@
+#include <iostream>
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <windows.h>
+
+/* run this program using the console pauser or add your own getch, system("pause") or input loop */
+
+		
+	/* DIEYKRINISEIS PROGRAMMATOS:
+	   1) PANTA na xrisimopoiountai peza grammata ektos apo to password kai ektos an ta zitaei to programma
+	   2) oi calories einai mono dipsifios i tripsifios arithos px1. 052 px2:134
+	*/   
+/*gobal metavlites*/
+	int m = 0 ;     /* i metabliti p metraei tin 8esi pou brisketai ka8e fora o pinakas*/
+	char * a[100][4];  /* o a einai o pinakas deiktwn me ta fagita klp*/
+	
+	
+
+	char food[100][20];
+	char calories[100];
+	char time[100];
+	char breakfast[]="prwino";
+
+	char lunch[]="mesimeriano";
+	char dinner[]="vradino";
+	
+	int login();
+	int password( char user[5] , char *a, char *b, char *c, char *d);
+	int add ( ); /* sinartisi me deiktes, sinartisi add*/
+	int modify();  /*sinartisi me deiktes, sinartisi modify*/
+	int view ( );  /*sinartisi me deiktes, sinartisi view*/
+	int search( );  /*sinartisi me deiktes, sinartisi search*/
+	int sort ();  /*sinartisi me deiktes, sinartisi sort*/
+	
+	
+
+int main(int argc, char** argv) {
+	
+
+	
+	
+SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),7);
+	printf("Welcome!\n");
+SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),15);
+	
+	/*login*/
+	login();   
+	/*end of login*/
+	system("cls");
+	
+	
+
+	
+	/*password*/
+	char username[5]={"john"};
+	char pass[5];
+	password( username, &pass[0], &pass[1], &pass[2], &pass[3] );
+	
+	
+	
+	printf("Please enter the password : ");
+	int i;
+	for(i=0;i<4;i++)
+	{
+		printf("%c",pass[i]);
+	}
+	printf(" to enter.\n");
+	scanf(" %s", &pass);
+	
+	
+	if ( (! (strcmp(pass, "JoHn") == 0)) &&  ( ! ( strcmp(pass, "jOhN") == 0)) )
+	{
+		do
+	 {   SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),4);
+		printf("Wrong password. Please give again!\n");
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),15);
+		scanf(" %s", &pass);
+	 }
+	 while (  (strcmp(pass, "JoHn") == 0) ||  ( strcmp(pass, "jOhN") == 0) );
+	}
+	
+	printf("Correct password.\n");
+	
+	/*end of password*/
+
+	
+	system("cls");
+	
+	/*Lunch Screen */
+	
+	
+	char answer[10];
+	 printf("What do you want to do?\n");
+	 SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),7);
+     printf("add, modify, view, search, sort, or exit?\n");
+ 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),15);
+	
+     scanf(" %s", &answer);
+	
+	while (!( strcmp(answer,"exit") == 0 ) )
+	{
+		
+    	/*add*/
+    	if (  strcmp(answer, "add") == 0  )
+    	{
+    		add( );
+	    
+    	}
+    	/*modify*/
+    	else if( strcmp(answer, "modify") == 0)
+    	{
+    		modify( );
+		}
+		/*view*/
+		else if( strcmp(answer, "view") == 0) 
+		{
+			view();
+		}
+		/*search*/
+    	else if( strcmp(answer, "search") == 0) 
+		{
+			search();
+        }
+        /*sort*/
+        else if ( strcmp(answer, "sort") == 0) 
+        {
+        	sort();
+		}
+		/*exit*/
+		else if ( strcmp(answer, "exit") == 0) 
+		{
+			break;
+		}
+		
+		system("cls");
+	    printf("What do you want to do?\n");
+	    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),7);
+    	printf("add, modify, view, search, sort, or exit?\n");
+    	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),15);
+
+	
+    	scanf(" %s", &answer);
+    }
+    
+    
+    
+    system("cls");
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),7);
+    printf("Thank you!\n");
+	printf("See you soon!\n");
+	
+	
+	
+	
+	
+	
+		
+	
+	
+	return 0;
+}
+
+
+
+/* sinartisi login*/
+
+int login( )
+{
+	char user[5];
+	printf("Please enter your user name.\n");
+	/* username = john */
+	scanf(" %s", &user);
+	while( ! (strcmp(user, "john") == 0 ) )
+	{
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),4);
+		printf("Wrong username.\n");
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),15);
+		system("cls");
+		printf("Please give again the username.\n");
+		scanf(" %s", &user);
+		
+	}
+	
+	printf("Correct username.\n");
+	
+	return 1;
+	
+}
+
+/* sinartisi password*/
+
+int password( char user[5] , char *a, char *b, char *c, char *d)
+{
+	int k;
+	k =1+rand()%2;
+	
+	
+	switch (k)
+	{
+		case 1:
+			{
+			   *a = 'J';
+			   *b = 'o';
+			   *c = 'H';
+			   *d = 'n';
+			   
+
+			}
+		case 2:
+			{
+			   *a = 'j';
+			   *b = 'O';
+			   *c = 'h';
+			   *d = 'N';
+				
+			}
+		break;	
+
+	}
+	
+	return 33;
+}
+
+
+
+
+/* sinartisi add*/
+
+int add (  )
+{
+	int ap=1;
+	
+	system("cls");
+	
+	while ( ap!=0 )
+	{
+		printf("What did you eat?\n");
+	    scanf(" %s", &food[m]);
+		a[m][0]= &food[m][0];
+	
+		
+		printf("How many calories it was?\n");
+		scanf(" %s", &calories[m]);
+		a[m][1] = &calories[m];
+		
+		printf("What time did you eat?\n");
+		scanf(" %s", &time[m]);
+		a[m][2] = &time[m];
+		
+		
+		if (((time[0]=='0')&&((time[1]=='5')||(time[1]=='6')||(time[1]=='7')||(time[1]=='8')||(time[1]=='9')))||( (time[0]=='1')&&(time[1]=='1')))
+		{
+			a[m][3] = breakfast;
+		}
+        else if((time[0]=='1')&&((time[1]=='2')||(time[1]=='3')||(time[1]=='4')||(time[1]=='5')||(time[1]=='6')||(time[1]=='7')||(time[1]=='8')||(time[1]=='9')))
+        {
+        	a[m][3] = lunch;
+		}
+		else
+		{
+			a[m][3]= dinner;
+		}
+	
+			
+		
+		system("cls");		
+		printf("If you want to exit from add write '0' or if you want to add more write '1'. \n");
+		scanf("%d", &ap);
+		m = m + 1;
+	}
+	
+	
+	return 0;	
+}
+
+
+/*sinartisi modify*/
+int modify()
+{
+	/*emfanisi stixion*/
+	printf("Food: %s .\n", a[m][0]);
+	printf("Calories: %s .\n", a[m][1]);
+	printf("Time: %s .\n", a[m][2]);
+	printf("Type: %s .\n\n\n\n", a[m][3]);
+	
+	
+	/*tropopoisi*/
+	printf("What do you want to change?\n");
+	printf("Press 1 for food, 2 for calories, 3 for time. \n");
+	int x;
+	scanf(" %d", &x);
+	
+	system("cls");
+	
+	if( x == 1)
+	{
+	
+		printf("What did you eat?\n");
+		char food1[10];
+		scanf(" %s", &food1);
+		a[m][0]= food1;
+		printf("Changes complete.\n");	
+	}
+	else if ( x == 2)
+	{
+		printf("How many calories it was?\n");
+		char calories1[4];
+		scanf(" %s", &calories1);
+		a[m][1] = calories1;
+		printf("Changes complete.\n");	
+	}
+	else if ( x == 3)
+	{
+		
+		printf("What time did you eat?\n");
+		char time1[10];
+		scanf(" %s", &time1);
+		a[m][2] = time1;
+		
+		
+		char breakfast[]="prwino";
+	    char lunch[]="mesimeriano";
+    	char dinner[]="vradino";
+		if (((time[0]=='0')&&((time[1]=='5')||(time[1]=='6')||(time[1]=='7')||(time[1]=='8')||(time[1]=='9')))||( (time[0]=='1')&&(time[1]=='1')))
+		{
+			a[m][3] = breakfast;
+		}
+        else if((time[0]=='1')&&((time[1]=='2')||(time[1]=='3')||(time[1]=='4')||(time[1]=='5')||(time[1]=='6')||(time[1]=='7')||(time[1]=='8')||(time[1]=='9')))
+        {
+        	a[m][3] = lunch;
+		}
+		else
+		{
+			a[m][3] = dinner;
+		}
+		printf("Changes complete.\n");	
+	}
+	
+	
+	return 0;
+	
+}
+
+
+
+/*sinartisi view*/
+int view ( )
+{
+	/*emfanisi stixion*/
+	printf("Food:\t\t");
+	printf("Calories:\t");	
+	printf("Time:\t\t");
+	printf("Type:\n");
+	
+	
+	int i;
+	for(i=0;i<m+1;i++)
+	{
+		printf(" %s\t\t",*a[i][0]);
+		printf(" %s\t", *a[i][1]);
+		printf(" %s\t\t", *a[i][2]);
+		printf(" %s\n", *a[i][3]);
+	}
+	
+	
+	/* emfanisi minimaton*/
+	printf("You have eat %d meals.", m);
+	
+	int x=0;
+	char  calories;
+	
+	for( i=0;i<m+1;i++)
+	{
+		calories =  *a[i][1]; 
+		calories = calories - '0';
+		x = x + calories;
+	}
+	printf("You have eat %d calories.\n", x);
+	
+	return 0;
+}
+
+
+/*sinartisi search*/
+int search( )
+{
+	printf("What do you want to search?\n");
+	printf("Write 'prwino' for breakfast, 'mesimeriano' for lunch or 'vradino' for dinner.\n");
+	
+	char apantisi[10];
+	scanf(" %s", apantisi);
+	
+	char typeoftime;
+	
+	int i;
+	for(i=0;i<m+1;i++)
+	{
+		typeoftime = *a[i][3];
+		if( strcmp(apantisi,"prwino") == 0 ) 
+		{
+		/*	if ( strcmp(typeoftime, "prwino") == 0)  */
+			{
+				printf(" %s\t\t",a[i][0]);
+	        	printf(" %s\t", a[i][1]);
+	        	printf(" %s\t\t", a[i][2]);
+	        	printf(" %s\n", a[i][3]);
+			}	
+		}
+		else if( strcmp(apantisi, "mesimeriano") == 0)
+		{
+		/*	if ( strcmp(typeoftime, "mesimeriano") == 0) */
+			{
+				printf(" %s\t\t",a[i][0]);
+	        	printf(" %s\t", a[i][1]);
+	        	printf(" %s\t\t", a[i][2]);
+	        	printf(" %s\n", a[i][3]);
+			}	
+		}
+		else
+		{
+		/*	if ( strcmp(typeoftime, "vradino") == 0)  */
+			{
+				printf(" %s\t\t",a[i][0]);
+	        	printf(" %s\t", a[i][1]);
+	        	printf(" %s\t\t", a[i][2]);
+	        	printf(" %s\n", a[i][3]);
+			}	
+		}
+	}
+	
+	return 0;
+}
+
+
+/*sinartisi sort*/
+int sort ( )
+{
+	int i,j;
+	char car1,car2,temp;
+	
+	for( i=2;i<=m;i++)
+	{
+		for (j=m;j>=0;j--)
+		{
+			car1 = *a[j-1][1];
+			car1 = car1 - '0';
+			car2 = *a[j][1];
+			car2 = car2 - '0';
+			if( car1 < car2)
+			{
+				/*antimeta8esi 8ermidon*/
+				temp = *a[j-1][1]; 
+				a[j-1][1] = a[j][1];
+				a[j][1] = &temp;
+				
+				/*antimeta8esi fagitwn*/
+				temp = *a[j-1][0]; 
+				a[j-1][0] = a[j][0];
+				a[j][0] = &temp;
+				
+				/*antimeta8esi wras*/
+				temp = *a[j-1][2]; 
+				a[j-1][2] = a[j][2];
+				a[j][2] = &temp;
+				
+				/*antimeta8esi tipou*/
+				temp = *a[j-1][3]; 
+				a[j-1][3] = a[j][3];
+				a[j][3] = &temp;
+			
+			}
+		}
+	
+	}
+	
+	
+	for(i=0;i<m+1;i++)
+	{
+		printf(" %s\t\t",*a[i][0]);
+		printf(" %s\t", *a[i][1]);
+		printf(" %s\t\t", *a[i][2]);
+		printf(" %s\n", *a[i][3]);
+	}
+	
+	
+	return 0;
+}
+
+
+
+
+
+
+
+
